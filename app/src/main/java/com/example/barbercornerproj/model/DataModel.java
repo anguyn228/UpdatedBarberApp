@@ -9,8 +9,6 @@ public class DataModel {
     private String password;
 
     //constructors
-
-
     public DataModel(String userName, String password, String name, String title) {
         this.userName = userName;
         this.password = password;

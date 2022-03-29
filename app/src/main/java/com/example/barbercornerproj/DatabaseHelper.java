@@ -79,13 +79,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_USERID, dataModel.getUserId());
         cv.put(COLUMN_PASSWORD, dataModel.getPassword());
 
-
         long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     public boolean addCustomerInfo(CustomerModel model) {

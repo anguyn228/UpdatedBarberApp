@@ -10,19 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.barbercornerproj.model.DataModel;
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     //  For debug
     private static final String LOG_TAG = "SIGN IN";
 
-    Button register, signIn;
-    EditText username, password;
-    private ArrayList<DataModel> users;
+    Button btnRegister, btnSignIn;
+    EditText edtUserName, edtPassword;
+    //private ArrayList<DataModel> users;
     private String USERID = "", TITLE = "", NAME = "";
     private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,34 +27,34 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        signIn = (Button) findViewById(R.id.loginbtn1);
-        register = (Button) findViewById(R.id.signupbtnreturn);
+        edtUserName = (EditText) findViewById(R.id.username);
+        edtPassword = (EditText) findViewById(R.id.password);
+        btnSignIn = (Button) findViewById(R.id.loginbtn1);
+        btnRegister = (Button) findViewById(R.id.signupbtnreturn);
 
-        users = databaseHelper.retrieveAllUsers();
-        register.setOnClickListener(v -> {
+        //users = databaseHelper.retrieveAllUsers();
+        btnRegister.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         });
 
-        signIn.setOnClickListener(v ->
+        btnSignIn.setOnClickListener(v ->
         {
-            String userN = username.getText().toString().trim();
-            String passW = password.getText().toString().trim();
+            String userName = edtUserName.getText().toString().trim();
+            String password = edtPassword.getText().toString().trim();
 
             // validate credentials
-            if (userN.isEmpty() || passW.isEmpty()) {
+            if (userName.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Username and password required", Toast.LENGTH_SHORT).show();
                 return;
+            }
 
-            }  if (userN.equalsIgnoreCase("admin") && passW.equals("admin")) {
-            // default user
-            startActivity(new Intent(MainActivity.this, UserDashBoard.class));
-            finish();
-
-        } else {
-            signIn(userN, passW);
-        }
+            if (userName.equalsIgnoreCase("admin") && password.equals("admin")) {
+                // default user
+                startActivity(new Intent(MainActivity.this, UserDashBoard.class));
+                finish();
+            } else {
+                signIn(userName, password);
+            }
         });
     }
 
@@ -104,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         signInByRole(roleFromDB);
         return true;
     }
-
 
     private void signInByRole(String role) {
         switch (role.toLowerCase()) {
