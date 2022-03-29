@@ -1,6 +1,17 @@
 package com.example.barbercornerproj.model;
 
 public class CustomerModel {
+
+    private String userId;
+    private String address;
+    private String age;
+
+    public CustomerModel(String userId, String address, String age) {
+        this.userId = userId;
+        this.address = address;
+        this.age = age;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -24,15 +35,4 @@ public class CustomerModel {
     public void setAge(String age) {
         this.age = age;
     }
-
-    private String userId;
-
-    public CustomerModel(String userId, String address, String age) {
-        this.userId = userId;
-        this.address = address;
-        this.age = age;
-    }
-
-    private String address;
-    private String age;
 }

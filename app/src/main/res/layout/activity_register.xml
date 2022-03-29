@@ -20,7 +20,7 @@
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="20dp"
         android:ems="10"
-        android:hint="Email Address"
+        android:hint="User name"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 

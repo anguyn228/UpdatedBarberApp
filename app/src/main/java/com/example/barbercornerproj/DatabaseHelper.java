@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
     // User table
     public static final String USER_TABLE = "USER_TABLE";
+    public static final String COLUMN_USER_NAME = "userName";
     public static final String COLUMN_NAME = "NAME";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_USERID = "USER" + COLUMN_ID;
@@ -46,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create user table user
-        String userTable = "CREATE TABLE " + USER_TABLE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT, " +COLUMN_TITLE + "TEXT,"+ COLUMN_USERID + " TEXT, " + COLUMN_PASSWORD + " TEXT )";
+        String userTable = "CREATE TABLE " + USER_TABLE + "(" + COLUMN_USER_NAME + " VARCHAR(500), " + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT, " + COLUMN_TITLE + " TEXT,"+ COLUMN_USERID + " TEXT, " + COLUMN_PASSWORD + " TEXT )";
         db.execSQL(userTable);
 
         //Create staff table
@@ -72,13 +73,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addUser(DataModel dataModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USER_NAME, dataModel.getUserName());
         cv.put(COLUMN_NAME, dataModel.getName());
         cv.put(COLUMN_TITLE, dataModel.getTitle());
         cv.put(COLUMN_USERID, dataModel.getUserId());
         cv.put(COLUMN_PASSWORD, dataModel.getPassword());
 
 
-        long insert = db.insert(CUSTOMER_TABLE, null, cv);
+        long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1) {
             return false;
         } else {
@@ -165,5 +167,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    public Cursor getUserByUserName(String userName) {
+        userName = "\"" + userName + "\"";
+        String query = "SELECT * FROM " + USER_TABLE + " WHERE " + COLUMN_USER_NAME + " = " + userName;
+        Cursor cursor = getReadableDatabase().rawQuery(query, null);
+        return cursor;
     }
 }

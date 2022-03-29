@@ -5,10 +5,18 @@ public class DataModel {
     private String name;
     private String title;
     private String userId;
+    private String userName;
     private String password;
 
     //constructors
 
+
+    public DataModel(String userName, String password, String name, String title) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.title = title;
+    }
 
     public DataModel(int id, String name, String title, String userId, String password) {
         this.id = id;
@@ -18,12 +26,12 @@ public class DataModel {
         this.password = password;
     }
 
-    public DataModel(String name, String title, String userId, String password) {
+    /*public DataModel(String name, String title, String userId, String password) {
         this.name = name;
         this.title = title;
         this.userId = userId;
         this.password = password;
-    }
+    }*/
 
     public DataModel() {
     }
@@ -75,5 +83,13 @@ public class DataModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

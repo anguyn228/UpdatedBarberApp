@@ -12,53 +12,47 @@ import com.example.barbercornerproj.model.CustomerModel;
 import com.example.barbercornerproj.model.DataModel;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText username1, password1, address, cusname, age;
+    EditText edtUserName, edtPassword, edtAddress, edtName, edtAge;
     private DatabaseHelper dataBaseHelper;
-    Button signupbtn, loginreturn;
+    Button btnSignUp, btnLoginReturn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         dataBaseHelper = new DatabaseHelper(this);
 
-        username1 = (EditText) findViewById(R.id.editTextUserName);
-        password1 = (EditText) findViewById(R.id.editTextPassWord);
-        address = (EditText) findViewById(R.id.editTextAddress);
-        cusname = (EditText) findViewById(R.id.editTextTextPersonName);
-        age = (EditText) findViewById(R.id.editTextAge);
-        signupbtn = (Button) findViewById(R.id.signupbtn2);
-        loginreturn = (Button) findViewById(R.id.loginreturn);
+        edtUserName = (EditText) findViewById(R.id.editTextUserName);
+        edtPassword = (EditText) findViewById(R.id.editTextPassWord);
+        edtAddress = (EditText) findViewById(R.id.editTextAddress);
+        edtName = (EditText) findViewById(R.id.editTextTextPersonName);
+        edtAge = (EditText) findViewById(R.id.editTextAge);
+        btnSignUp = (Button) findViewById(R.id.signupbtn2);
+        btnLoginReturn = (Button) findViewById(R.id.loginreturn);
 
 
-        loginreturn.setOnClickListener(v -> {
+        btnLoginReturn.setOnClickListener(v -> {
             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
         });
-        signupbtn.setOnClickListener(v -> {
+        btnSignUp.setOnClickListener(v -> {
             // get user inputs
-            String userId = username1.getText().toString().trim();
-            String pw = password1.getText().toString().trim();
-            String name = cusname.getText().toString().trim();
-            String adrress = address.getText().toString().trim();
-            String age1 = age.getText().toString().trim();
-            // validate input
-            if(userId.isEmpty() || pw.isEmpty()){
-                Toast.makeText(this, "Username and password are required", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            String userName = edtUserName.getText().toString().trim();
+            String password = edtPassword.getText().toString().trim();
+            String name = edtName.getText().toString().trim();
+            String address = edtAddress.getText().toString().trim();
+            String age = edtAge.getText().toString().trim();
 
-            registerUser(userId, pw, name, adrress, age1);
+            validateInput(userName, password, name, address, age);
 
+            registerUser(userName, password, name, address, age);
         });
-
     }
 
-    private void registerUser(String username, String pw, String name, String address, String age) {
+    private void registerUser(String userName, String password, String name, String address, String age) {
 
-
-        CustomerModel customer = new CustomerModel( age, address, username);
+        CustomerModel customer = new CustomerModel(age, address, userName);
         String name1 = name + "";
         String role = "Customer";
-        DataModel data = new DataModel(name, role, pw, username);
+        DataModel data = new DataModel(userName, password, name, role);
 
         // save user to db
         if(dataBaseHelper.addUser(data)){ // user was added successfully
@@ -67,10 +61,33 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Registration was successful", Toast.LENGTH_SHORT).show();
                 finish();
             }
-        }else {
+        } else {
             Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
-
         }
     }
 
+    private boolean validateInput(String userName, String password, String name, String address, String age) {
+        if (userName.isEmpty()) {
+            Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Name is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (address.isEmpty()) {
+            Toast.makeText(this, "Address is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        
+        if (userName.trim().contains(" ")) {
+            Toast.makeText(this, "Username must not contain spaces.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 }
