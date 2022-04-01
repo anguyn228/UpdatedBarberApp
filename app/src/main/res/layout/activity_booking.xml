@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookingActivity">
+
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        android:layout_below="@id/action_bar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circulastd_bold"
+            android:text="Barber Booking"
+            android:textSize="30sp"
+            android:textColor="#3c5063"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/header"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date_select"
+            android:layout_below="@id/header"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:id="@+id/date_select_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Date"
+                android:textSize="15sp"
+                android:textFontWeight="500"/>
+
+            <CalendarView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
+                android:layout_below="@id/date_select_title"
+                android:layout_marginTop="10dp"
+                android:id="@+id/calendar_view"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_select"
+            android:layout_below="@id/date_select"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/time_select_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Time"
+                android:textFontWeight="500"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/time_select_title"
+                android:background="@drawable/rounded_corner"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Click here"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textFontWeight="500"
+                android:id="@+id/txt_select_time"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/barber_select"
+            android:layout_below="@id/time_select"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/barber_select_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Select Barber"
+                android:textFontWeight="500"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:id="@+id/rel_barber_select"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
+                android:padding="10dp"
+                android:layout_below="@id/barber_select_title">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/barber"
+                    android:id="@+id/img_barber_avatar"/>
+                <TextView
+                    android:id="@+id/txt_barber_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click here"
+                    android:layout_toRightOf="@id/img_barber_avatar"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15dp"
+                    android:textFontWeight="500"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/barber_select"
+            android:text="Book Now"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/light_blue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_book"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -20,17 +20,23 @@ public class MainActivity extends AppCompatActivity {
     private String USERID = "", TITLE = "", NAME = "";
     private DatabaseHelper databaseHelper;
 
+    private void startTestActivity() {
+        Intent intent = new Intent(this, BookingActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         databaseHelper = new DatabaseHelper(this);
+        startTestActivity();
 
-        edtUserName = (EditText) findViewById(R.id.username);
-        edtPassword = (EditText) findViewById(R.id.password);
-        btnSignIn = (Button) findViewById(R.id.loginbtn1);
-        btnRegister = (Button) findViewById(R.id.signupbtnreturn);
+        edtUserName = findViewById(R.id.username);
+        edtPassword = findViewById(R.id.password);
+        btnSignIn = findViewById(R.id.loginbtn1);
+        btnRegister = findViewById(R.id.signupbtnreturn);
 
         //users = databaseHelper.retrieveAllUsers();
         btnRegister.setOnClickListener(v -> {
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         int roleColumnIndex = user.getColumnIndex(DatabaseHelper.COLUMN_TITLE);
         String roleFromDB = user.getString(roleColumnIndex);
-        Log.i(LOG_TAG, "rold from database: " + roleFromDB);
+        Log.i(LOG_TAG, "role from database: " + roleFromDB);
         signInByRole(roleFromDB);
         return true;
     }
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             case "customer":
-                startActivity(new Intent(MainActivity.this, UserDashBoard.class)
+                 startActivity(new Intent(MainActivity.this, UserDashBoard.class)
                         .putExtra("userid", USERID)
                         .putExtra("name", NAME));
                 finish();

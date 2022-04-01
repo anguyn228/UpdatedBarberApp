@@ -19,9 +19,8 @@ public class StaffModel {
     private String bio;
 
     //constructors
-
-
-    public StaffModel(String userID, String name, String title, String location, String shift, String bio) {
+    public StaffModel(int id, String userID, String name, String title, String location, String shift, String bio) {
+        this.id = id;
         this.name = name;
         this.title = title;
         this.location = location;
@@ -29,8 +28,6 @@ public class StaffModel {
         this.userID = userID;
         this.bio = bio;
     }
-
-
 
     public StaffModel(String userID, String title, String location, String shift, String bio) {
         this.userID = userID;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:paddingRight="30dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/img_barber_avatar"
+        android:src="@drawable/barber"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Barber Name"
+        android:textSize="20sp"
+        android:id="@+id/txt_barber_name"
+        android:layout_toRightOf="@id/img_barber_avatar"
+        android:layout_marginLeft="20dp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

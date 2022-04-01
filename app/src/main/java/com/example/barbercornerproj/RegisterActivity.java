@@ -49,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(String userName, String password, String name, String address, String age) {
-
         CustomerModel customer = new CustomerModel(age, address, userName);
         String role = "Customer";
         DataModel data = new DataModel(userName, password, name, role);
